@@ -1,5 +1,5 @@
 # Cards
- test task for Red Rift.
+ Test task for Red Rift.
  I tried to complete all steps:
  
 1. Load card art randomly from [https://picsum.photos/](https://picsum.photos/) each time app starts.
