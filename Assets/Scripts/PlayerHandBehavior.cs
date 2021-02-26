@@ -8,30 +8,32 @@ public class PlayerHandBehavior : MonoBehaviour
     List<CardBehaviourScript> cards = new List<CardBehaviourScript>();
     List<CardBehaviourScript> cardsToDestroy = new List<CardBehaviourScript>();
 
-    public GameEventSO CorStarted;
-    public float delta=150;
+    public float deltaAngle = 3.0f;
+    public float circleRadius = 2000;
     private bool corStart = false;
 
-    public GameObject cardExample;
+    public GameEventSO CorStarted;
+    public GameEventSO CorEnded;
+    public CardBehaviourScript cardExample;
     // Start is called before the first frame update
 
     private void Awake()
     {
-        
-    }
-    void Start()
-    {
         int i = UnityEngine.Random.Range(4, 6);
-        while(i>=0)
+        while (i >= 0)
         {
-            GameObject card = Instantiate(cardExample);
+            CardBehaviourScript card = Instantiate(cardExample);
             card.transform.SetParent(this.transform);
-            card.GetComponent<CardBehaviourScript>().OnDestroy += AddToDestroyList;
-            cards.Add(card.GetComponent<CardBehaviourScript>());
+            card.OnDestroy += AddToDestroyList;
+            cards.Add(card);
             i--;
         }
         cardsToDestroy = new List<CardBehaviourScript>();
         calcCardsPosNoAnim();
+    }
+    void Start()
+    {
+      
     }
 
     // Update is called once per frame
@@ -64,31 +66,42 @@ public class PlayerHandBehavior : MonoBehaviour
 
     public void calcCardsPos()
     {
-        float chldCount = transform.childCount;
-        float startLine = delta/2 - (chldCount / 2) * delta;
-        for (int i = 0; i < transform.childCount; i++)
+        float chldCount = cards.Count;
+        float startAng = (deltaAngle /2.0f) - (chldCount / 2.0f) * deltaAngle;
+        Vector3 circleCenter =  new Vector3(0, -circleRadius, 0);
+        for (int i = 0; i < cards.Count; i++)
         {
-            if (transform.GetChild(i).TryGetComponent<CardBehaviourScript>(out CardBehaviourScript j))
-                j.Move(new Vector3(startLine, 0, 0));
-            startLine += delta;
+            Vector3 pos = calcCardsAngle(startAng, circleCenter);
+            cards[i].Move(pos);
+            cards[i].Rotate(startAng);
+            cards[i].transform.SetSiblingIndex(i);
+            startAng += deltaAngle;
         }
+    }
 
-
+    Vector3 calcCardsAngle(float ang, Vector3 center) {
+        Vector3 pos;
+        pos.x = center.x + (circleRadius * Mathf.Sin(ang * Mathf.Deg2Rad));
+        pos.y = center.y + (circleRadius * Mathf.Cos(ang * Mathf.Deg2Rad));
+        pos.z = 0;
+        return pos;
     }
 
     public void calcCardsPosNoAnim()
     {
         float chldCount = transform.childCount;
-        float startLine = delta / 2 - (chldCount / 2) * delta;
-        for (int i = 0; i < transform.childCount; i++)
+        float startAng = (deltaAngle / 2.0f) - (chldCount / 2.0f) * deltaAngle;
+        Vector3 circleCenter = new Vector3(0, -circleRadius, 0);
+        for (int i = 0; i < cards.Count; i++)
         {
-            if (transform.GetChild(i).TryGetComponent<CardBehaviourScript>(out CardBehaviourScript j))
-                j.transform.localPosition = new Vector3(startLine, 0, 0);
-            startLine += delta;
+            Vector3 pos = calcCardsAngle(startAng, circleCenter);
+            cards[i].transform.localPosition = pos;
+            cards[i].transform.rotation = Quaternion.Euler(0, 0, -startAng);
+            startAng += deltaAngle;
         }
-
-
     }
+
+
     public void ChangeCardValue() 
     {
         if(!corStart)
@@ -99,19 +112,19 @@ public class PlayerHandBehavior : MonoBehaviour
     IEnumerator ChangingCardValue()
     {
         CorStarted.Raise();
-        while (this.transform.childCount > 0)
-        {
-            for (int i = 0; i < transform.childCount; i++)
-            {
-                if (transform.GetChild(i).TryGetComponent<CardBehaviourScript>(out CardBehaviourScript j))
-                    j.ChangeValue(Random.Range(-2,9), Random.Range(1,4));
-                yield return new WaitForSeconds(2);
-            }
-            DestroyCardsList();
-            yield return new WaitForSeconds(0.5f);
-            calcCardsPos();
-            yield return new WaitForSeconds(2f);
-        }
+        cards[Random.Range(0, cards.Count-1)].ChangeValue(Random.Range(-2, 9), Random.Range(1, 3));
+        yield return new WaitForSeconds(1);
+        DestroyCardsList();
+        yield return new WaitForSeconds(0.5f);
+        calcCardsPos();
+        CorEnded.Raise();
+        corStart = false;
     }
 
+
+    public void removeCardFromList(CardBehaviourScript cd) 
+    {
+        cards.Remove(cd);
+        calcCardsPos();
+    }
 }

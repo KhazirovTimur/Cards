@@ -10,24 +10,23 @@ using DG.Tweening;
 public class CardBehaviourScript : MonoBehaviour
 {
     [SerializeField]
-    private Text cardNameText;
+    private Text cardNameText = default;
     [SerializeField]
-    private Text descriptionText;
+    private Text descriptionText = default;
     [SerializeField]
-    private Text damageText;
+    private Text damageText = default;
     [SerializeField]
-    private Text healthText;
+    private Text healthText = default;
     [SerializeField]
-    private Text manaText;
-    public Image image;
-    public Image borderImage;
-    public GameObject counterAnim;
+    private Text manaText = default;
+    public Image image = default;
+    public Image borderImage = default;
+    public Text counterAnim;
 
-    [SerializeField]
-    private float cardSpeed = 0.3f;
-    
+    public float deltaWhileChange = 350f;
     public float cardMovingTime = 2f;
-    private bool wasMoved = false;
+    [HideInInspector]
+    public bool wasPlayed = false;
     private int damageValue;
     private int manaValue;
     private int healthValue;
@@ -38,6 +37,7 @@ public class CardBehaviourScript : MonoBehaviour
     public List<CardScriptableObject> CardInfoList;
     private CardScriptableObject CardInfo;
     public int CardInfoChoose = 0;
+
     public GameEventSO RecalcPos;
     // Start is called before the first frame update
     void Start()
@@ -115,6 +115,11 @@ public class CardBehaviourScript : MonoBehaviour
         transform.DOLocalMove(pos, cardMovingTime);
     }
 
+    public void Rotate(float ang) 
+    {
+        transform.DORotate(new Vector3(0,0,-ang), cardMovingTime);
+    }
+
     public void ChangeValue(int value, int type)
     {
         StartCoroutine(ChangingValue(value, type));
@@ -123,44 +128,25 @@ public class CardBehaviourScript : MonoBehaviour
 
     IEnumerator ChangingValue(int value, int type) 
     {
-        Move(this.transform.localPosition+new Vector3(0,300,0));
+        this.transform.rotation = new Quaternion(0, 0, 0, 1);
+        Move(new Vector3 (this.transform.localPosition.x, deltaWhileChange, 0));
         yield return new WaitForSeconds(0.7f);
         switch (type)
         {
             case 1:
-                int tmp = value - healthValue;
-                string tmpText = tmp.ToString();
-                if (tmp > 0)
-                    tmpText = "+" + tmp.ToString();
+                int diff = value - healthValue;
                 healthValue = value;
-                GameObject textValue = (GameObject)Instantiate(counterAnim, this.transform.GetChild(4).transform.GetChild(0).transform.position, this.transform.GetChild(4).transform.rotation);
-                textValue.transform.SetParent(this.transform);
-                textValue.GetComponent<Text>().text = tmpText;
-                textValue.transform.localScale = this.transform.GetChild(4).transform.GetChild(0).transform.localScale;
+                InitAnimCounter(diff, 4, new Color(0.8f,0.1f,0.1f));
                 break;
             case 2:
-                tmp = value - damageValue;
-                tmpText = tmp.ToString();
-                if (tmp > 0)
-                    tmpText = "+" + tmp.ToString();
+                diff = value - damageValue;
                 damageValue = value;
-                textValue = (GameObject)Instantiate(counterAnim, this.transform.GetChild(5).transform.GetChild(0).transform.position, this.transform.GetChild(4).transform.rotation);
-                textValue.transform.SetParent(this.transform);
-                textValue.GetComponent<Text>().text = tmpText;
-                textValue.GetComponent<Text>().color = new Color(0.8f, 0.8f, 0.8f);
-                textValue.transform.localScale = this.transform.GetChild(5).transform.GetChild(0).transform.localScale;
+                InitAnimCounter(diff, 5, new Color(0.8f, 0.8f, 0.8f));
                 break;
             case 3:
-                tmp = value - manaValue;
-                tmpText = tmp.ToString();
-                if (tmp > 0)
-                    tmpText = "+" + tmp.ToString();
+                diff = value - manaValue;
                 manaValue = value;
-                textValue = (GameObject)Instantiate(counterAnim, this.transform.GetChild(3).transform.GetChild(0).transform.position, this.transform.GetChild(4).transform.rotation);
-                textValue.transform.SetParent(this.transform);
-                textValue.GetComponent<Text>().text = tmpText;
-                textValue.GetComponent<Text>().color = new Color(0.1f,0.1f,0.8f);
-                textValue.transform.localScale = this.transform.GetChild(3).transform.GetChild(0).transform.localScale;
+                InitAnimCounter(diff, 3, new Color(0.1f, 0.1f, 0.8f));
                 break;
 
         }
@@ -175,11 +161,25 @@ public class CardBehaviourScript : MonoBehaviour
     }
 
 
+    void InitAnimCounter(int tmp, int index, Color col) 
+    {
+        string tmpText = tmp.ToString();
+        if (tmp > 0)
+            tmpText = "+" + tmp.ToString();
+        Text textValue = (Text)Instantiate(counterAnim, this.transform.GetChild(index).transform.GetChild(0).transform.position, this.transform.GetChild(index).transform.rotation);
+        textValue.transform.SetParent(this.transform);
+        textValue.text = tmpText;
+        textValue.transform.localScale = this.transform.GetChild(index).transform.GetChild(0).transform.localScale;
+        textValue.color = col;
+    }
+
+
     void DestroyThisCard() 
     {
         StopAllCoroutines();
         OnDestroy.Invoke(this);
     }
+
 
 
     //Help func//////////////////////////////
@@ -191,10 +191,8 @@ public class CardBehaviourScript : MonoBehaviour
         return vec.magnitude;
     }
 
-    public float VectorAngleSigned(Vector3 a, Vector3 b)
+    public void Deb() 
     {
-        Vector3 tmp = new Vector3(Mathf.Abs(Vector3.Cross(a, b).x), Mathf.Abs(Vector3.Cross(a, b).y), Mathf.Abs(Vector3.Cross(a, b).z));
-
-        return Vector3.Angle(a, b) * (Vector3.Cross(a, b).z / Mathf.Abs(tmp.z));
+        Debug.Log(transform.up);
     }
 }

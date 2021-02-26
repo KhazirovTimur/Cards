@@ -11,10 +11,9 @@ GameObject:
   - component: {fileID: 3075214450729179399}
   - component: {fileID: 3075214450729179398}
   - component: {fileID: 3075214450729179397}
-  - component: {fileID: 3075214450729179396}
   m_Layer: 5
   m_Name: PlayerHand
-  m_TagString: Untagged
+  m_TagString: Hand
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,9 +49,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54044c8c711b4b04382161bd8cb6c1fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deltaAngle: 7
+  circleRadius: 700
   CorStarted: {fileID: 11400000, guid: 4c506a2898d588e409822bd8239b78c2, type: 2}
-  delta: 200
-  cardExample: {fileID: 2934318760630694360, guid: b2b4773735b31034482085f8920be335,
+  CorEnded: {fileID: 11400000, guid: 256dfebc7063ec046a16e01ec2d8b131, type: 2}
+  cardExample: {fileID: 2934318760630694362, guid: b2b4773735b31034482085f8920be335,
     type: 3}
 --- !u!114 &3075214450729179397
 MonoBehaviour:
@@ -81,28 +82,3 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &3075214450729179396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3075214450729179400}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 5
-    m_Right: 5
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 4
-  m_Spacing: 5
-  m_ChildForceExpandWidth: 0
-  m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0

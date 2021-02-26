@@ -312,7 +312,7 @@ GameObject:
   - component: {fileID: 1297041832}
   - component: {fileID: 1297041831}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -546,7 +546,7 @@ PrefabInstance:
     - target: {fileID: 3075214450729179399, guid: 01eb2f37512d39b4bb2c998ac0edf89c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 120
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 3075214450729179399, guid: 01eb2f37512d39b4bb2c998ac0edf89c,
         type: 3}
@@ -726,26 +726,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1834428644}
     m_Modifications:
-    - target: {fileID: 6749185128220916242, guid: 73b8d54d2bc1b1f4798cd3c2b8220731,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6749185128220916242, guid: 73b8d54d2bc1b1f4798cd3c2b8220731,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6749185128220916242, guid: 73b8d54d2bc1b1f4798cd3c2b8220731,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6749185128220916242, guid: 73b8d54d2bc1b1f4798cd3c2b8220731,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6749185128696636050, guid: 73b8d54d2bc1b1f4798cd3c2b8220731,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2934318759730862844}
   - component: {fileID: 2934318759730862846}
   - component: {fileID: 2934318759730862847}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,7 +85,7 @@ GameObject:
   - component: {fileID: 2934318760062731655}
   - component: {fileID: 2934318760062731649}
   - component: {fileID: 2934318760062731654}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 2934318760359945691}
   - component: {fileID: 2934318760359945509}
   - component: {fileID: 2934318760359945690}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 2934318760501460232}
   - component: {fileID: 2934318760501460234}
   - component: {fileID: 2934318760501460235}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 2934318760612667593}
   - component: {fileID: 2934318760612667595}
   - component: {fileID: 2934318760612667592}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -398,9 +398,10 @@ GameObject:
   - component: {fileID: 1182577792}
   - component: {fileID: -2756062811082396465}
   - component: {fileID: -7810111283101438850}
-  m_Layer: 5
+  - component: {fileID: -1258631906334832112}
+  m_Layer: 8
   m_Name: Card
-  m_TagString: Untagged
+  m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -450,10 +451,11 @@ MonoBehaviour:
   manaText: {fileID: 2934318760882378733}
   image: {fileID: 2934318759730862847}
   borderImage: {fileID: 1182577792}
-  counterAnim: {fileID: 2763354238136599823, guid: f8b459e014a4beb4e8e4606599ab5a44,
+  counterAnim: {fileID: 6967192189726615523, guid: f8b459e014a4beb4e8e4606599ab5a44,
     type: 3}
-  cardSpeed: 0.2
+  deltaWhileChange: 250
   cardMovingTime: 0.5
+  wasPlayed: 0
   CardInfoList:
   - {fileID: 11400000, guid: 4162803fdfac72b4eb2ee05f288a61ed, type: 2}
   - {fileID: 11400000, guid: 3eb3241c45887d7409934d21fbaa3428, type: 2}
@@ -474,8 +476,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9969dd0d1cab575458c77be6842d553f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaulParent: {fileID: 0}
   recalcPos: {fileID: 11400000, guid: 5575bb8d2ef50154fa16fedf3c388bbf, type: 2}
+  cg: {fileID: -2756062811082396465}
+  card: {fileID: 2934318760630694362}
 --- !u!222 &1182577793
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -552,6 +555,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &-1258631906334832112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2934318760630694360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d201783e4d4bf469114a65a1ca658c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 256dfebc7063ec046a16e01ec2d8b131, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3623513257142837998}
+        m_MethodName: ChangeCorState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2934318760882378723
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,7 +593,7 @@ GameObject:
   - component: {fileID: 2934318760882378722}
   - component: {fileID: 2934318760882378732}
   - component: {fileID: 2934318760882378733}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -641,7 +671,7 @@ GameObject:
   - component: {fileID: 2934318761050380219}
   - component: {fileID: 2934318761050380165}
   - component: {fileID: 2934318761050380218}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Mana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -716,7 +746,7 @@ GameObject:
   - component: {fileID: 2934318761228855005}
   - component: {fileID: 2934318761228855007}
   - component: {fileID: 2934318761228855004}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Damage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -791,7 +821,7 @@ GameObject:
   - component: {fileID: 2934318761384841118}
   - component: {fileID: 2934318761384841112}
   - component: {fileID: 2934318761384841113}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: CardPlate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -865,7 +895,7 @@ GameObject:
   - component: {fileID: 2934318761574966335}
   - component: {fileID: 2934318761574966329}
   - component: {fileID: 2934318761574966334}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -943,7 +973,7 @@ GameObject:
   - component: {fileID: 2934318761815155056}
   - component: {fileID: 2934318761815155058}
   - component: {fileID: 2934318761815155059}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}

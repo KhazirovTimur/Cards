@@ -6,21 +6,21 @@ using UnityEngine.Events;
 public class GameEventListener : MonoBehaviour
 {
         [SerializeField]
-        private GameEventSO gameEvent; // 2
+        private GameEventSO gameEvent = default; 
         [SerializeField]
-        private UnityEvent response; // 3
+        private UnityEvent response = default; 
 
-        private void OnEnable() // 4
+        private void OnEnable() 
         {
             gameEvent.RegisterListener(this);
         }
 
-        private void OnDisable() // 5
+        private void OnDisable() 
         {
             gameEvent.UnregisterListener(this);
         }
 
-        public void OnEventRaised() // 6
+        public void OnEventRaised() 
         {
             response.Invoke();
         }
