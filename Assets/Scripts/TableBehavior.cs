@@ -12,14 +12,14 @@ public class TableBehavior : MonoBehaviour,  IDropHandler
 
     Dictionary<GameObject, CardBehaviourScript> cardsDict = new Dictionary<GameObject, CardBehaviourScript>();
 
-    private PlayerHandBehavior phand;
+    private PlayerHandBehavior playerHand;
 
     public float delta=150;
     // Start is called before the first frame update
 
     private void Start()
     {
-        phand = FindObjectOfType<PlayerHandBehavior>();
+        playerHand = FindObjectOfType<PlayerHandBehavior>();
         cards = FindObjectsOfType<CardBehaviourScript>().ToList();
         for (int i = 0; i < cards.Count; i++)
             cardsDict.Add(cards[i].gameObject, cards[i]);
@@ -65,16 +65,11 @@ public class TableBehavior : MonoBehaviour,  IDropHandler
         if (cardsDict.TryGetValue(cardObj, out card))
         {
             cardObj.transform.SetParent(this.transform);
-            phand.removeCardFromList(card);
+            playerHand.removeCardFromList(card);
             cards.Add(card);
             calcCardsPos();
             card.wasPlayed = true;
         }
-        
-
-
-       
-
     }
 
 }

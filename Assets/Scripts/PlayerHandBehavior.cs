@@ -36,33 +36,8 @@ public class PlayerHandBehavior : MonoBehaviour
       
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
-
-    public void AddToDestroyList(CardBehaviourScript card) 
-    {
-        if (cards.Contains(card))
-        {
-            cardsToDestroy.Add(card);
-            card.gameObject.SetActive(false);
-        }
-    }
-
-    public void DestroyCardsList() 
-    {
-        foreach (var i in cardsToDestroy)
-        { 
-            cards.Remove(i);
-            Destroy(i.gameObject);
-        }
-        cardsToDestroy = new List<CardBehaviourScript>();   
-    }
-
-   
+    //Card position calculation/////////////////////////////
 
     public void calcCardsPos()
     {
@@ -102,6 +77,8 @@ public class PlayerHandBehavior : MonoBehaviour
     }
 
 
+    //Card change value//////////////////////////////
+
     public void ChangeCardValue() 
     {
         if(!corStart)
@@ -122,9 +99,30 @@ public class PlayerHandBehavior : MonoBehaviour
     }
 
 
+    //Delete card func////////////////////////////
+
     public void removeCardFromList(CardBehaviourScript cd) 
     {
         cards.Remove(cd);
         calcCardsPos();
+    }
+
+    public void AddToDestroyList(CardBehaviourScript card)
+    {
+        if (cards.Contains(card))
+        {
+            cardsToDestroy.Add(card);
+            card.gameObject.SetActive(false);
+        }
+    }
+
+    public void DestroyCardsList()
+    {
+        foreach (var i in cardsToDestroy)
+        {
+            cards.Remove(i);
+            Destroy(i.gameObject);
+        }
+        cardsToDestroy = new List<CardBehaviourScript>();
     }
 }

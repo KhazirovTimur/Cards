@@ -74,11 +74,6 @@ public class CardBehaviourScript : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void UpdateCardInfo() 
     {
@@ -119,6 +114,10 @@ public class CardBehaviourScript : MonoBehaviour
     {
         transform.DORotate(new Vector3(0,0,-ang), cardMovingTime);
     }
+
+
+
+    //Changing Value////////////////
 
     public void ChangeValue(int value, int type)
     {
@@ -174,6 +173,10 @@ public class CardBehaviourScript : MonoBehaviour
     }
 
 
+
+    //Destroy/////////////////////
+
+
     void DestroyThisCard() 
     {
         StopAllCoroutines();
@@ -182,17 +185,4 @@ public class CardBehaviourScript : MonoBehaviour
 
 
 
-    //Help func//////////////////////////////
-
-    public float distanceCount(Vector3 a, Vector3 b)
-    {
-        Vector3 vec = a;
-        vec -= b;
-        return vec.magnitude;
-    }
-
-    public void Deb() 
-    {
-        Debug.Log(transform.up);
-    }
 }
