@@ -90,7 +90,7 @@ public class PlayerHandBehavior : MonoBehaviour
     {
         CorStarted.Raise();
         cards[Random.Range(0, cards.Count-1)].ChangeValue(Random.Range(-2, 9), Random.Range(1, 3));
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.2f);
         DestroyCardsList();
         yield return new WaitForSeconds(0.5f);
         calcCardsPos();
@@ -124,5 +124,6 @@ public class PlayerHandBehavior : MonoBehaviour
             Destroy(i.gameObject);
         }
         cardsToDestroy = new List<CardBehaviourScript>();
+  
     }
 }

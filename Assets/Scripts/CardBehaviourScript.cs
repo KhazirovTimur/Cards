@@ -129,7 +129,7 @@ public class CardBehaviourScript : MonoBehaviour
     {
         this.transform.rotation = new Quaternion(0, 0, 0, 1);
         Move(new Vector3 (this.transform.localPosition.x, deltaWhileChange, 0));
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.5f);
         switch (type)
         {
             case 1:
@@ -150,7 +150,7 @@ public class CardBehaviourScript : MonoBehaviour
 
         }
         UpdateCardInfo();
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.5f);
         if (healthValue <= 0)
         {
             DestroyThisCard();
