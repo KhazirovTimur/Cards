@@ -7,3 +7,6 @@ Cards in-hand mechanic in hardstone style
 4. Bind Attack, Health and mana properties to UI. Changing those values from code must be reflected on card UI with counter animation.
 5. If some card’s HP drop below 1 - remove this card from player’s hand. (dont forget to     reposition other cards, use tweens to make it smooth)
 6. Player can drag card and drop it on the middle of table (use drop panel of any size) Card moves back to player’s hand if it’s not dropped over the drop panel. Cards shines if its dragged
+
+
+Demonstration https://drive.google.com/file/d/1fS_CqR1x5mDgE-_WQ_zmb81mUEoF4bA1/view?usp=sharing
