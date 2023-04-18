@@ -1,5 +1,5 @@
 # Cards
-Cards in-hand mechanic in hardstone style
+Cards in-hand mechanic in heartstone style
  
 1. Load card art randomly from [https://picsum.photos/](https://picsum.photos/) each time app starts.
 2. Fulfil player’s hand with 4-6 cards in a fan-way. (arc) The number of cards should be determined at random at the start of the game
